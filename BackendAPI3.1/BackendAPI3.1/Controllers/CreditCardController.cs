@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend;
 using Backend.Models;
-
+using BackendAPI3._1.Models;
+using System.Net;
+    
 namespace BackendAPI3._1.Controllers
 {
     [Route("api/[controller]")]
@@ -19,6 +21,15 @@ namespace BackendAPI3._1.Controllers
         public CreditCardController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        [HttpPost("invoiceDatos")]
+        public async Task<ActionResult<Invoice>> PostInvoice(Invoice invoice)
+        {
+            _context.Invoices.Add(invoice);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetInvoice", new { id = invoice.Id }, invoice);
         }
 
         // GET: api/CreditCard
