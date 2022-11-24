@@ -1,0 +1,16 @@
+<table class="table table-sm">
+  <tr *ngFor="let usuario of usuarioService.list">
+      <td>{{usuario.cedulaUsuario}}</td>
+      <td>{{usuario.nombreUsuario}}</td>
+      <td>{{usuario.apellidosUsuario}}</td>
+      <td>{{usuario.enfoque}}</td>
+      <td>{{usuario.experiencia}}</td>
+      <td>{{usuario.email}}</td>
+      <td>
+          <i style="cursor: pointer;" class="far fa-edit fa-lg text-info" (click)="contactar(usuario)"></i>
+      </td>
+      <td>
+          <i style="cursor: pointer;" (click)="eliminarUsuario(usuario.pK_idUsuario!)" class="far fa-trash-alt fa-lg text-danger"></i>
+      </td>
+  </tr>
+</table>
