@@ -1,0 +1,6 @@
+.btn-primary{
+    border-color: black;
+    border-width: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 0px;
+}

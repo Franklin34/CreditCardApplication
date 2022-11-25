@@ -1,18 +1,50 @@
-<div class="jumbtron">
-    <h1 class="display-4 text-center">Tarjetas de Credito</h1>
-    <hr>
-    <div class="row">
-        <div class="col-md-5">
-            <h6 class="text-center">
-                Agregar Tarjeta
-            </h6>
-            <app-tarjeta-credito></app-tarjeta-credito>
+
+<div class="container-fluid p-0" style="border-color:black; background-color: rgb(255, 255, 255); border-width: 5px; border-style: solid; border-top-left-radius: 15px; border-top-right-radius: 15px; height: 850px">
+    <div class="row-fluid" style="background-color:black; width: 100%;  height: 85px">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 text-center" style="color: white">Tutores Registrados</h1>
+            </div>
         </div>
-        <div class="col-md-7">
-            <h6 class="text-center">
-                Listado de Tarjetas
-            </h6>
-            <app-list-tarjeta-credito></app-list-tarjeta-credito>
+        <div class="row">
+        <div class="col-12" style="margin-top: -13px;">
+            <!-- Button trigger modal -->
+            <button type="button" style="background-color: rgb(2, 91, 192);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Registrarse
+            </button>
         </div>
     </div>
+            
+    </div>
+    <div class="row">
+          <!-- Modal Registrar-->
+        <div class="modal fade col-md-8" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="10"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <app-tarjeta-credito></app-tarjeta-credito>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-11" style="margin: 0 auto;">
+            <h6 class="text-center mt-2">
+                Lista de Tutores
+            </h6>
+            <hr>
+            <app-list-tarjeta-credito></app-list-tarjeta-credito>
+        </div>
+        
+    </div>
+
 </div>
