@@ -1,3 +1,4 @@
+import { Contacto } from './../../../models/contacto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +15,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class ListTarjetaCreditoComponent implements OnInit {
 
   form:FormGroup;
+  formContacto:FormGroup;
 
   constructor(private formBuilder:FormBuilder, public usuarioService: UsuarioService,public toastr:ToastrService) {
     this.form = this.formBuilder.group({
@@ -25,6 +27,12 @@ export class ListTarjetaCreditoComponent implements OnInit {
       experiencia: ['',[Validators.required],],
       numero: ['',[Validators.required],],
       email: ['',[Validators.required],]
+    })
+
+    this.formContacto = this.formBuilder.group({
+      EmailEstudiante: ['',[Validators.required],],
+      NombreEstudiante: ['',[Validators.required],],
+      NumeroEstudiante: ['',[Validators.required],]
     })
    }
 
@@ -46,9 +54,16 @@ export class ListTarjetaCreditoComponent implements OnInit {
     this.usuarioService.actualizar(usuario);
   }
 
-  contactar(usuario:IUsuarios){
-    this.usuarioService.contactarUsuario(usuario).subscribe(data => {
-      console.log('sda');
+  contactar(){
+    const contacto: Contacto = {
+      EmailTutor: this.form.get('email')?.value,
+      NombreEstudiante: this.formContacto.get('NombreEstudiante')?.value,
+      NumeroEstudiante: this.formContacto.get('NumeroEstudiante')?.value,
+      EmailEstudiante: this.formContacto.get('EmailEstudiante')?.value
+    }
+
+    this.usuarioService.contactarUsuario(contacto).subscribe(data => {
+      this.toastr.warning("Correo Enviado","El usuario tutor fue contactado");
     });
   }
 

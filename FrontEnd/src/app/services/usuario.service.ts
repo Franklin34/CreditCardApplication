@@ -33,14 +33,7 @@ export class UsuarioService {
     return this.http.put<IUsuarios>(this.myAppUrl + this.myApiUrl + id, usuario);
   }
 
-  contactarUsuario(usuario:IUsuarios) :Observable<Contacto>{
-    const contacto:Contacto = {
-      EmailEstudiante: usuario.email,
-      NombreEstudiante: usuario.nombreUsuario,
-      EmailTutor: usuario.email,
-      NumeroEstudiante: usuario.cedulaUsuario
-    }
-    console.log(contacto)
+  contactarUsuario(contacto:Contacto) :Observable<Contacto>{
     return this.http.post<Contacto>(this.myAppUrl + this.myApiUrl + 'contactarTutor', contacto);
   }
 

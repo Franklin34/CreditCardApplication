@@ -17,7 +17,7 @@
             <td>{{usuario.enfoque}}</td>
 
             <td>
-                <i style="cursor: pointer;" (click)="contactar(usuario)"><img src="https://png.pngtree.com/png-vector/20191027/ourlarge/pngtree-send-email-glyph-icon-vector-png-image_1885945.jpg" height="50px" width="50px">  </i>
+              <button type="button"  style="background-color: rgb(2, 91, 192);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCont">Contactar</button>
             </td>
             <td>
               <button type="button" style="background-color: rgba(121, 121, 121, 0.781); border-color: aliceblue;" (click)="verTutor(usuario)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#VerTutor">
@@ -134,4 +134,60 @@
 
     </div>
 
+    <div class="modal fade col-md-8" id="modalCont" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="10"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Datos del estudiante</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="formContacto">
+              <div class="col-md-12">
+                  <div class="form-group mt-2">
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text bg-white">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                                  </svg>
+                              </div>
+                          </div>
+                          <input type="text" class="form-control" formControlName="EmailEstudiante" placeholder="Correo electrónico">
+                      </div>
+                  </div>
+                  <div class="form-group mt-2">
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text bg-white">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16">
+                                      <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
+                                  </svg>
+                              </div>
+                          </div>
+                          <input type="text" class="form-control" formControlName="NombreEstudiante" maxlength="50" placeholder="Nombre completo">
+                      </div>
+                  </div>
+                  <div class="form-group mt-2">
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text bg-white">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                      <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                  </svg>
+                              </div>
+                          </div>
+                          <input type="text" class="form-control" formControlName="NumeroEstudiante" maxlength="50" placeholder="Teléfono">
+                      </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="contactar()" class="btn btn-warning" data-bs-dismiss="modal">Enviar correo</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+      </div>
+      </div>
+  </div>
 </div>
