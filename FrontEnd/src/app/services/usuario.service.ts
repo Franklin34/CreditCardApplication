@@ -48,6 +48,7 @@ export class UsuarioService {
     this.http.get(this.myAppUrl + this.myApiUrl).toPromise()
     .then(data => {
       this.list = data as IUsuarios[];
+      console.log(this.list)
     })
   }
 

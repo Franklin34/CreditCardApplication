@@ -19,6 +19,7 @@ export interface IUsuarios {
   apellidosUsuario:  string;
   enfoque:        string;
   experiencia:           string;
+  numero:  string;
   email?:      string;
   avatar?:             string;
   fK_idRolUsuario1:       number;

@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { IUsuarios } from 'src/app/models/IPerfilUsuario';
 import { TarjetaCredito } from 'src/app/models/tarjetaCredito';
 import { TarjetaService } from 'src/app/services/tarjeta.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-tarjeta-credito',
@@ -13,30 +15,37 @@ import { TarjetaService } from 'src/app/services/tarjeta.service';
 export class TarjetaCreditoComponent implements OnInit,OnDestroy {
   form:FormGroup;
   suscription?:Subscription;
-  tarjeta?:TarjetaCredito;
-  idTarjeta = 0;
+  usuario?:IUsuarios;
+  idUsuario = 0;
 
-  constructor(private formBuilder:FormBuilder, private tarjetaService:TarjetaService,private toastr:ToastrService) {
+  constructor(private formBuilder:FormBuilder, private usuarioService:UsuarioService,private toastr:ToastrService) {
     this.form = this.formBuilder.group({
-      id: 0,
-      titular: ['',[Validators.required],],
-      numeroTarjeta: ['',[Validators.required, Validators.maxLength(16),Validators.minLength(16)],],
-      fechaExpiracion: ['',[Validators.required, Validators.maxLength(5),Validators.minLength(5)],],
-      cvv: ['',[Validators.required, Validators.maxLength(3),Validators.minLength(3)],]
+      pK_idUsuario: 0,
+      cedulaUsuario: ['',[Validators.required],],
+      nombreUsuario: ['',[Validators.required],],
+      apellidosUsuario: ['',[Validators.required],],
+      enfoque: ['',[Validators.required],],
+      experiencia: ['',[Validators.required],],
+      numero: ['',[Validators.required],],
+      email: ['',[Validators.required],]
     })
   }
 
+
+
   ngOnInit(): void {
-    this.suscription = this.tarjetaService.obtenerTarjetas$().subscribe(data =>{
+    this.suscription = this.usuarioService.obtenerUsuarios$().subscribe(data =>{
       console.log(data);
-      this.tarjeta = data;
+      this.usuario = data;
       this.form.patchValue({
-        titular:this.tarjeta.titular,
-        numeroTarjeta:this.tarjeta.numeroTarjeta,
-        fechaExpiracion: this.tarjeta.fechaExpiracion,
-        cvv:this.tarjeta.cvv
+        cedulaUsuario:this.usuario.cedulaUsuario,
+        nombreUsuario:this.usuario.nombreUsuario,
+        apellidosUsuario: this.usuario.apellidosUsuario,
+        enfoque:this.usuario.enfoque,
+        experiencia:this.usuario.experiencia,
+        numero:this.usuario.numero,
+        email:this.usuario.email,
       });
-      this.idTarjeta = this.tarjeta.id!;
     })
   }
 
@@ -44,43 +53,52 @@ export class TarjetaCreditoComponent implements OnInit,OnDestroy {
     this.suscription!.unsubscribe();
   }
 
-  guardarTarjeta(){
-    if(this.idTarjeta === 0){
+  guardarUsuario(){
+    console.log(this.idUsuario)
+    if(this.idUsuario === 0){
       this.agregar();
     }
     else{
+      console.log('dsad')
       this.editar();
     }
   }
 
   agregar(){
-    const tarjeta: TarjetaCredito = {
-      titular: this.form.get('titular')?.value,
-      numeroTarjeta: this.form.get('numeroTarjeta')?.value,
-      fechaExpiracion: this.form.get('fechaExpiracion')?.value,
-      cvv: this.form.get('cvv')?.value,
+    const usuario: IUsuarios = {
+      cedulaUsuario: this.form.get('cedulaUsuario')?.value,
+      nombreUsuario: this.form.get('nombreUsuario')?.value,
+      apellidosUsuario: this.form.get('apellidosUsuario')?.value,
+      enfoque: this.form.get('enfoque')?.value,
+      experiencia: this.form.get('experiencia')?.value,
+      email: this.form.get('email')?.value,
+      numero: this.form.get('numero')?.value,
+      fK_idRolUsuario1: 1,
     }
 
-    this.tarjetaService.guuardarTarjeta(tarjeta).subscribe(data => {
-      this.toastr.success("Registro agregado","La tarjeta fue agregada");
-      this.tarjetaService.obtenerTarjetas();
+    this.usuarioService.guuardarUsuario(usuario).subscribe(data => {
+      this.toastr.success("Registro agregado","El usuario fue agregado");
+      this.usuarioService.obtenerUsuarios();
       this.form.reset();
     });
   }
 
   editar(){
-    const tarjeta: TarjetaCredito = {
-      id:this.tarjeta?.id,
-      titular: this.form.get('titular')?.value,
-      numeroTarjeta: this.form.get('numeroTarjeta')?.value,
-      fechaExpiracion: this.form.get('fechaExpiracion')?.value,
-      cvv: this.form.get('cvv')?.value,
+    const usuario: IUsuarios = {
+      cedulaUsuario: this.form.get('cedulaUsuario')?.value,
+      nombreUsuario: this.form.get('nombreUsuario')?.value,
+      apellidosUsuario: this.form.get('apellidosUsuario')?.value,
+      enfoque: this.form.get('enfoque')?.value,
+      experiencia: this.form.get('experiencia')?.value,
+      email: this.form.get('email')?.value,
+      numero: this.form.get('numero')?.value,
+      fK_idRolUsuario1: 1,
     }
-    this.tarjetaService.actualizarTarjeta(this.idTarjeta,tarjeta).subscribe(data => {
+    this.usuarioService.actualizarUsuario(this.idUsuario,usuario).subscribe(data => {
       this.toastr.success("Registro Actualizado","La tarjeta fue Actualizada");
-      this.tarjetaService.obtenerTarjetas();
+      this.usuarioService.obtenerUsuarios();
       this.form.reset();
-      this.idTarjeta = 0;
+      this.idUsuario = 0;
     });
   }
 }
